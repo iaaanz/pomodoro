@@ -1,0 +1,65 @@
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodorozinho Pog</title>
+</head>
+
+<body class="body animate fadeLeft">
+  <div id="container">
+
+    <div id="buttons-container-up"> <!--Botoes da parte superior-->
+      <a id="">Natureza</a>
+      <a id="">Oceano</a>
+      <a id="">Por do Sol</a>
+      <a id="">Chuvoso</a>
+      <a id="">Neve</a>
+    </div>
+
+    <div id="timer-container"> <!-- txt do Temporizador -->
+        <div id="session-timer-min">30</div>
+        <div id="divisor-timer">:</div>
+        <div id="session-timer-sec">00</div>
+    </div>
+
+    <div id="buttons-container-timer"> <!-- Botoes do temporizador-->
+        <a id="iniciar" onclick="iniciar()">Iniciar</a>
+        <a id="parar" onclick="reiniciar()">Reiniciar</a>
+    </div>
+
+    <div id="txts-timers-container">
+        <div id="session-txt-timer">Sessão</div>
+        <div id="break-txt-timer">Intervalo</div>
+    </div>
+
+    <div id="buttons-container-timer-up"> <!-- Botoes aumentar tempo-->
+        <a id="session-min-up" onclick="session_min_up()"> ⬆ </a>
+        <a id="session-sec-up" onclick="session_sec_up() "> ⬆ </a>
+        <a id="break-min-up" onclick="break_min_up()"> ⬆ </a>
+        <a id="break-sec-up" onclick="break_sec_up() "> ⬆ </a>
+    </div>
+
+    <div id="txts-container"> <!-- txt editavel pelo usuario -->
+        <div id="time-session-min">30</div>
+        <div id="divisor-txt">:</div>
+        <div id="time-session-sec">00</div>
+        <div id="time-break-min">05</div>
+        <div id="divisor-txt-2">:</div>
+        <div id="time-break-sec">00</div>
+    </div>
+
+    <div id="buttons-container-timer-down"> <!-- Botoes diminuir tempo-->
+        <a id="session-min-down" onclick="session_min_down()" > ⬇ </a>
+        <a id="session-sec-down" onclick="session_sec_down()"> ⬇ </a>
+        <a id="break-min-down" onclick="break_min_down()" > ⬇ </a>
+        <a id="break-sec-down" onclick="break_sec_down()"> ⬇ </a>
+    </div>
+
+  </div>
+<script src="JS/script.js"></script>
+</body>
+
+</html>

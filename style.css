@@ -1,0 +1,219 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*-----------------------------------------------------------*/
+
+html {
+  background: #a6d5df;
+  /*background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(13,13,47,1) 11%, rgb(0, 106, 255) 100%); */
+  background-image: url('back1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 250px;
+  background-attachment: fixed;
+  font-family: 'Montserrat', sans-serif;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+@-webkit-keyframes fadeLeft {
+  from{
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  to{
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeLeft {
+  from{
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+  to{
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeLeft{
+  -webkit-animation-name: fadeLeft;
+  animation-name: fadeLeft;
+}
+
+.body{
+  -webkit-animation-delay: 0s;
+  -moz-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.animate {
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+#container {
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#buttons-container-up {
+  display: flex;
+  width: 100%;
+  padding-bottom: 200px;
+}
+
+#buttons-container-up a{
+  width: 20%;
+  border-right: 1px solid white;
+  padding: 10px 0px 10px 0px;
+  font-size: 1.3em;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+#buttons-container-up a:hover{
+  background-color: rgb(255, 255, 255, 0.3);
+}
+
+#buttons-container-up a:last-child{
+  border-right: 0;
+}
+
+#timer-container{
+  color: white;
+  display: flex;
+  font-size: 9em;
+}
+
+#buttons-container-timer{
+  color: white;
+  font-size: 2.5em;
+  cursor: pointer;
+  padding: 30px 0px;
+}
+
+#txts-timers-container{
+  width: 320px;
+  text-align: center;
+  font-size: 2em;
+  color: white;
+}
+
+#break-txt-timer {
+  float: right;
+}
+
+#session-txt-timer {
+  float: left;
+}
+
+#iniciar {
+  border: 1px solid white;
+  border-radius: 100px;
+  padding: 0px 120px 0px 120px;
+  box-shadow: 0 9px rgb(255, 255, 255, 0.3);
+}
+
+#parar {
+  border: 1px solid white;
+  border-radius: 100px;
+  padding: 0px 20px 0px 20px;
+  box-shadow: 0 9px rgb(255, 255, 255, 0.3);
+  display: none;
+
+}
+
+#iniciar:hover {
+  background-color: #3e8e41;
+}
+
+#parar:hover {
+  background-color: #CD0000;
+}
+
+#buttons-container-timer-up{
+  font-size: 4em;
+  color: white;
+  cursor: pointer;
+}
+
+#buttons-container-timer-down{
+  font-size: 4em;
+  color: white;
+  cursor: pointer;
+}
+
+#txts-container {
+  font-size: 2.5em;
+  display: flex;
+  color: white;
+  
+}
+
+#timesession{
+  padding-right: 10px;
+}
+
+/*html {
+    background-image: linear-gradient(to bottom right, red, yellow);
+  }*/
