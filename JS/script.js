@@ -1,26 +1,25 @@
 //Temporizador Pomodoro
 
 //Variaveis
-var min = 30;
+var min = 25;
 var sec = 0;
 var milis = 0;
 var minbreak = 5;
 var secbreak = 0;
-var cont;
+var cont = 0;
 var styleIniciar = document.getElementById('iniciar').style;
 var styleParar = document.getElementById('parar').style;
 
-function cronometro(){
+function cronometro() {
     if (sec == 0 && min == 0) {
-        clearInterval(cont)
-        aler('dasdd')
+        clearInterval(cont);
     }
     else if (sec == 0) {
         sec = 60;
         min--;
     }
-    if (milis == 0) { 
-        milis = 99;
+    if (milis == 0) {
+        milis = 100;
         sec--;
     }
     else {
@@ -28,65 +27,77 @@ function cronometro(){
     }
 }
 
-function timer_template(time, value) { //Formata a saida do txt
-    if (value < 10){
-        document.getElementById(time).innerText = '0' + value;
-    }
-    else {
-        document.getElementById(time).innerText = value;
-    }
-}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
 function alterHover(id, colorIn, colorOut) { //Funcao pra alterar o hover
-    $(id).hover(function(){
+    $(id).hover(function () {
         $(this).css("background-color", colorIn);
-        }, function(){
+    }, function () {
         $(this).css("background-color", colorOut);
-        });
+    });
+}
+
+function formatTimer(id, value) {
+    if (value < 10) {
+        $(id).html('0' + value);
+    }
+    else {
+        $(id).html(value);
+    }
 }
 
 function iniciar() { //Inicia os timers
-    var statusCron = document.getElementById('iniciar').textContent;
-    if (statusCron == 'Iniciar'){
+    let statusCron = $('#iniciar').text();
+    if (statusCron == 'Iniciar') {
         clearInterval(cont);
         cont = setInterval(() => { timersession() }, 10);
-        document.getElementById("iniciar").innerText = "Parar"; 
-        document.getElementById("parar").innerText = "Reiniciar";
+        $('#iniciar').html('Parar');
+        $('#parar').html('Reinicar');
         styleIniciar.padding = '0px 20px 0px 20px';
-        styleParar.display = 'inline'; 
+        styleParar.display = 'inline';
         alterHover('#iniciar', "#CD0000", "");
         alterHover('#parar', "#FFCC00", "");;
     }
-    else{
+    else {
         clearInterval(cont);
-        document.getElementById("iniciar").innerText = "Iniciar"; 
+        $('#iniciar').html('Iniciar');
         styleIniciar.padding = '0px 120px 0px 120px';
-        styleParar.display = 'none'; 
+        styleParar.display = 'none';
         alterHover('#iniciar', "#3e8e41", "");
     }
 }
 
-function reiniciar() {
-    clearInterval(cont);
-    min = document.getElementById('time-session-min').textContent;
-    sec = document.getElementById('time-session-sec').textContent;
+async function reiniciar() {
+    min = 25;
+    sec = 0;
     milis = 0;
+    formatTimer('#session-timer-min', min);
+    formatTimer('#time-session-min', min);
+    formatTimer('#session-timer-sec', sec);
+    formatTimer('#time-session-sec', sec); 
+    //Funcao sleep() porque ta reiniciando 1sec a menos, ARRUMAR!//
+    clearInterval(cont);
+    await sleep(1000);
+    clearInterval(cont);
     cont = setInterval(() => { timersession() }, 10);
-    document.getElementById("iniciar").innerText = "Parar"; 
-    document.getElementById("parar").innerText = "Reiniciar";
+    $('#iniciar').html('Parar');
+    $('#parar').html('Reiniciar');
     styleIniciar.padding = '0px 20px 0px 20px';
-    styleParar.display = 'inline'; 
+    styleParar.display = 'inline';
+
 }
 
 function timersession() { //Inicia o timer da session
-    cronometro()
-    timer_template('session-timer-min', min)
-    timer_template('session-timer-sec', sec)
+    cronometro();
+    formatTimer('#session-timer-min', min);
+    formatTimer('#session-timer-sec', sec);
 }
 
 function timerbreak() { //Inicia o timer do break
-    timer_template('session-timer-min', minbreak)
-    timer_template('session-timer-sec', secbreak)
+    $('#session-timer-min').html(minbreak);
+    $('#session-timer-sec').html(secbreak);
 }
 
 function session_min_up() { //Aumenta os minutos
@@ -95,49 +106,41 @@ function session_min_up() { //Aumenta os minutos
     }
     if (min < 59 && min >= 0) {
         min++;
-        timer_template('time-session-min', min);
-        timer_template('session-timer-min', min)
+        formatTimer('#session-timer-min', min);
+        formatTimer('#time-session-min', min);
     }
 }
 
 function session_min_down() { //Diminui os minutos
-    if (min == 0){
-        min = 59
+    if (min == 0) {
+        min = 59;
     }
     if (min <= 59 && min > 0) {
         min--;
-        timer_template('time-session-min', min);
-        timer_template('session-timer-min', min)
+        formatTimer('#session-timer-min', min);
+        formatTimer('#time-session-min', min);
     }
 }
 
 function session_sec_up() { //Aumenta os segundos
-    if (sec == 55){
-        sec = 0
+    if (sec == 55) {
+        sec = 0;
     }
     if (sec < 55 && sec >= 0) {
-        sec++;
-        sec++;
-        sec++;
-        sec++;
-        sec++;
-        timer_template('time-session-sec', sec);
-        timer_template('session-timer-sec', sec)
+        sec = sec + 5;
+        formatTimer('#session-timer-sec', sec);
+        formatTimer('#time-session-sec', sec);
     }
 }
 
 function session_sec_down() { //Diminui os segundos
-    if (sec == 0){
-        sec = 55
+    if (sec == 0) {
+        sec = 55;
     }
     if (sec <= 55 && sec > 0) {
-        sec--;
-        sec--;
-        sec--;
-        sec--;
-        sec--;
-        timer_template('time-session-sec', sec);
-        timer_template('session-timer-sec', sec)
+        sec = sec - 5;
+        formatTimer('#session-timer-sec', sec);
+        formatTimer('#time-session-sec', sec);
     }
 }
 function break_min_up() { //Aumenta os minutos
@@ -146,44 +149,36 @@ function break_min_up() { //Aumenta os minutos
     }
     if (minbreak < 59 && minbreak >= 0) {
         minbreak++;
-        timer_template('time-break-min', minbreak);
+        $('#time-break-min').html(minbreak);
     }
 }
 
 function break_min_down() { //Diminui os minutos
-    if (minbreak == 0){
-        minbreak = 59
+    if (minbreak == 0) {
+        minbreak = 59;
     }
     if (minbreak <= 59 && minbreak > 0) {
         minbreak--;
-        timer_template('time-break-min', minbreak);
+        $('#time-break-min').html(minbreak);
     }
 }
 
 function break_sec_up() { //Aumenta os segundos
-    if (secbreak == 55){
-        secbreak = 0
+    if (secbreak == 55) {
+        secbreak = 0;
     }
     if (secbreak < 55 && secbreak >= 0) {
-        secbreak++;
-        secbreak++;
-        secbreak++;
-        secbreak++;
-        secbreak++;
-        timer_template('time-break-sec', secbreak);
+        secbreak = secbreak + 5;
+        $('#time-break-sec').html(secbreak);
     }
 }
 
 function break_sec_down() { //Diminui os segundos
-    if (secbreak == 0){
-        secbreak = 55
+    if (secbreak == 0) {
+        secbreak = 55;
     }
     if (secbreak <= 55 && secbreak > 0) {
-        secbreak--;
-        secbreak--;
-        secbreak--;
-        secbreak--;
-        secbreak--;
-        timer_template('time-break-sec', secbreak);
+        secbreak = secbreak - 5;
+        $('#time-break-sec').html(secbreak);
     }
 }
